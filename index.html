@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .section-2{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+</style>
+
+<body>
+    <div class="modal-element">
+        <div class="modal-toolbar">
+            <div class="modal-title"></div>
+            <div class="close-btn"></div>
+        </div>
+        <div class="modal-body">
+
+            <div id="static-form-container">
+                <fw-form id="fw-static-form">
+
+                    <fw-select label="Tipo Nota de Crédito" id="tipo-nota-credito" required="true" value="1"
+                        placeholder="Tipo nota de Crédito" >
+
+                        <fw-select-option value="administrativa">Administrativa</fw-select-option>
+                        <fw-select-option value="operacional">Operacional</fw-select-option>
+                    </fw-select>
+
+                    <div class="section-2">
+                        <fw-select label="Folio DTE" id="folio_dte" required="true" value="1"
+                            placeholder="Folio DTE" >
+
+                            <fw-select-option value="administrativa">Administrativa</fw-select-option>
+                            <fw-select-option value="operacional">Operacional</fw-select-option>
+                        </fw-select>
+
+                        <fw-form-control type="TEXT" name="rut" placeholder="Rut" required label="Rut"
+                        id="rut"></fw-form-control>
+
+                        <fw-form-control type="TEXT" name="monto_neto" placeholder="Monto Neto" required label="Monto Neto"
+                        id="monto_neto"></fw-form-control>
+
+                        <fw-form-control type="TEXT" name="nombre" placeholder="Nombre" required label="Nombre"
+                        id="nombre"></fw-form-control>
+
+                        <fw-form-control type="TEXT" name="fecha_emision" placeholder="Fecha Emision" required label="Fecha Emision"
+                        id="fecha_emision"></fw-form-control>
+                    </div>
+
+                    <div class="section-3">
+                        <fw-select label="Motivo" id="motivo" required="true" value="1"
+                            placeholder="Motivo" hint-text="Seleccione Folio DTE">
+
+                            <fw-select-option value="administrativa">Administrativa</fw-select-option>
+                            <fw-select-option value="operacional">Operacional</fw-select-option>
+                        </fw-select>
+                        <fw-form-control type="TEXT" name="detalleMotivo" placeholder="Detalle otro Motivo" required label="Detalle Motivo"
+                        id="detalleMotivo"></fw-form-control>
+                    </div>
+
+                </fw-form>
+
+                <fw-button id="submit-static-form">Submit</fw-button>
+                <fw-button id="reset-static-form">Reset</fw-button>
+            </div>
+        </div>
+        <script type="module"
+            src="https://cdn.jsdelivr.net/npm/@freshworks/crayons@v4/dist/crayons/crayons.esm.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/npm/@freshworks/crayons@v4/dist/crayons/crayons.js"></script>
+
+</body>
+
+</html>
