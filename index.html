@@ -8,9 +8,18 @@
 </head>
 
 <style>
-    .section-2{
+    body {
+        margin: 10rem;
+    }
+
+    .inputs-section {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    fw-form-control {
+        margin-top: -1rem;
     }
 </style>
 
@@ -26,53 +35,199 @@
                 <fw-form id="fw-static-form">
 
                     <fw-select label="Tipo Nota de Crédito" id="tipo-nota-credito" required="true" value="1"
-                        placeholder="Tipo nota de Crédito" >
+                        placeholder="Tipo nota de Crédito">
 
                         <fw-select-option value="administrativa">Administrativa</fw-select-option>
                         <fw-select-option value="operacional">Operacional</fw-select-option>
                     </fw-select>
 
-                    <div class="section-2">
-                        <fw-select label="Folio DTE" id="folio_dte" required="true" value="1"
-                            placeholder="Folio DTE" >
+                    <div id="form-administrativa" class="form-administrativa">
+                        <div class="section-1">
+                            <div class="first-row">
+                                <fw-select label="Centro de costo" id="centro_costo_administrativa" required="true"
+                                    value="1" placeholder="Centro de costo">
 
-                            <fw-select-option value="administrativa">Administrativa</fw-select-option>
-                            <fw-select-option value="operacional">Operacional</fw-select-option>
-                        </fw-select>
+                                    <fw-select-option value="administrativa">Administrativa</fw-select-option>
+                                    <fw-select-option value="operacional">Operacional</fw-select-option>
+                                </fw-select>
+                            </div>
+                            <div class="inputs-section">
+                                <fw-form-control type="TEXT" name="nombre" placeholder="Nombre" required label="Nombre"
+                                    id="nombre_administrativa"></fw-form-control>
+                                <fw-form-control type="TEXT" name="lob" placeholder="LOB" required label="LOB"
+                                    id="lob_administrativa"></fw-form-control>
+                                <fw-form-control type="TEXT" name="cliente" placeholder="Cliente" required
+                                    label="Cliente" id="cliente_administrativa"></fw-form-control>
+                                <fw-form-control type="TEXT" name="division" placeholder="Division" required
+                                    label="Division" id="division_administrativa"></fw-form-control>
+                                <fw-form-control type="TEXT" name="agrupbise" placeholder="Bise" required
+                                    label="Agrup BISE" id="bise_administrativa"></fw-form-control>
+                            </div>
+                        </div>
 
-                        <fw-form-control type="TEXT" name="rut" placeholder="Rut" required label="Rut"
-                        id="rut"></fw-form-control>
+                        <div class="section-2">
+                            <div class="first-row">
+                                <fw-select label="Folio DTE" id="folio_dte_administrativa" required="true" value="1"
+                                    placeholder="Folio DTE">
 
-                        <fw-form-control type="TEXT" name="monto_neto" placeholder="Monto Neto" required label="Monto Neto"
-                        id="monto_neto"></fw-form-control>
+                                    <fw-select-option value="administrativa">Administrativa</fw-select-option>
+                                    <fw-select-option value="operacional">Operacional</fw-select-option>
+                                </fw-select>
+                            </div>
 
-                        <fw-form-control type="TEXT" name="nombre" placeholder="Nombre" required label="Nombre"
-                        id="nombre"></fw-form-control>
+                            <div class="inputs-section">
+                                <fw-form-control type="TEXT" name="rut" placeholder="Rut" required label="Rut"
+                                    id="rut_administrativa"></fw-form-control>
 
-                        <fw-form-control type="TEXT" name="fecha_emision" placeholder="Fecha Emision" required label="Fecha Emision"
-                        id="fecha_emision"></fw-form-control>
+                                <fw-form-control type="TEXT" name="monto_neto" placeholder="Monto Neto" required
+                                    label="Monto Neto" id="monto_neto_administrativa"></fw-form-control>
+
+                                <fw-form-control type="TEXT" name="nombre" placeholder="Nombre" required label="Nombre"
+                                    id="nombre_folio_administrativa"></fw-form-control>
+
+                                <fw-form-control type="TEXT" name="fecha_emision" placeholder="Fecha Emision" required
+                                    label="Fecha Emision" id="fecha_emision_administrativa"></fw-form-control>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="section-3">
+                            <fw-select label="Motivo" id="motivo" required="true" value="1" placeholder="Motivo"
+                                hint-text="Seleccione Folio DTE">
+
+                                <fw-select-option value="administrativa">Administrativa</fw-select-option>
+                                <fw-select-option value="operacional">Operacional</fw-select-option>
+                            </fw-select>
+                            <fw-form-control type="TEXT" name="detalleMotivo" placeholder="Detalle otro Motivo" required
+                                label="Detalle Motivo" id="detalleMotivo"></fw-form-control>
+                        </div>
+
                     </div>
 
-                    <div class="section-3">
-                        <fw-select label="Motivo" id="motivo" required="true" value="1"
-                            placeholder="Motivo" hint-text="Seleccione Folio DTE">
 
-                            <fw-select-option value="administrativa">Administrativa</fw-select-option>
-                            <fw-select-option value="operacional">Operacional</fw-select-option>
-                        </fw-select>
-                        <fw-form-control type="TEXT" name="detalleMotivo" placeholder="Detalle otro Motivo" required label="Detalle Motivo"
-                        id="detalleMotivo"></fw-form-control>
+
+                    <div id="form-operacional" class="form-operacional" style="display: none;">
+                        <div class="section-1">
+                            <div class="first-row">
+                                <fw-select label="Centro de costo" id="centro_costo_administrativa" required="true"
+                                    value="1" placeholder="Centro de costo">
+
+                                    <fw-select-option value="administrativa">Administrativa</fw-select-option>
+                                    <fw-select-option value="operacional">Operacional</fw-select-option>
+                                </fw-select>
+                            </div>
+                            <div class="inputs-section">
+                                <fw-form-control type="TEXT" name="nombre" placeholder="Nombre" required label="Nombre"
+                                    id="nombre_administrativa"></fw-form-control>
+                                <fw-form-control type="TEXT" name="lob" placeholder="LOB" required label="LOB"
+                                    id="lob_administrativa"></fw-form-control>
+                                <fw-form-control type="TEXT" name="cliente" placeholder="Cliente" required
+                                    label="Cliente" id="cliente_administrativa"></fw-form-control>
+                                <fw-form-control type="TEXT" name="division" placeholder="Division" required
+                                    label="Division" id="division_administrativa"></fw-form-control>
+                                <fw-form-control type="TEXT" name="agrupbise" placeholder="Bise" required
+                                    label="Agrup BISE" id="bise_administrativa"></fw-form-control>
+                            </div>
+                        </div>
+
+                        <div class="section-2">
+                            <div class="first-row">
+                                <fw-select label="Folio DTE" id="folio_dte_administrativa" required="true" value="1"
+                                    placeholder="Folio DTE">
+
+                                    <fw-select-option value="administrativa">Administrativa</fw-select-option>
+                                    <fw-select-option value="operacional">Operacional</fw-select-option>
+                                </fw-select>
+                            </div>
+
+                            <div class="inputs-section">
+                                <fw-form-control type="TEXT" name="rut" placeholder="Rut" required label="Rut"
+                                    id="rut_administrativa"></fw-form-control>
+
+                                <fw-form-control type="TEXT" name="monto_neto" placeholder="Monto Neto" required
+                                    label="Monto Neto" id="monto_neto_administrativa"></fw-form-control>
+
+                                <fw-form-control type="TEXT" name="nombre" placeholder="Nombre" required label="Nombre"
+                                    id="nombre_folio_administrativa"></fw-form-control>
+
+                                <fw-form-control type="TEXT" name="fecha_emision" placeholder="Fecha Emision" required
+                                    label="Fecha Emision" id="fecha_emision_administrativa"></fw-form-control>
+                            </div>
+
+
+
+                        </div>
+
+                        <div id="section-operacional" class="section-operacional inputs-section">
+
+                            <fw-select label="Tipo" id="tipo_administrativa" required="true" value="1"
+                                placeholder="Tipo">
+
+                                <fw-select-option value="nc-anulacion">NC Por Anulación</fw-select-option>
+                                <fw-select-option value="nc-rebaja">NC Por Rebaja</fw-select-option>
+                                <fw-select-option value="nc-correccion">NC Por Corrección</fw-select-option>
+                            </fw-select>
+
+
+                            <fw-form-control type="TEXT" name="tipo" placeholder="Tipo" required label="Tipo"
+                                id="tipo"></fw-form-control>
+
+                            <fw-form-control type="TEXT" name="monto" placeholder="Monto" required label="Monto"
+                                id="monto"></fw-form-control>
+
+                        </div>
+
+                        <div class="section-3">
+                            <fw-select label="Motivo" id="motivo" required="true" value="1" placeholder="Motivo"
+                                hint-text="Seleccione Folio DTE">
+
+                                <fw-select-option value="administrativa">Administrativa</fw-select-option>
+                                <fw-select-option value="operacional">Operacional</fw-select-option>
+                            </fw-select>
+                            <fw-form-control type="TEXT" name="detalleMotivo" placeholder="Detalle otro Motivo" required
+                                label="Detalle Motivo" id="detalleMotivo"></fw-form-control>
+                        </div>
+
                     </div>
+
+
 
                 </fw-form>
 
-                <fw-button id="submit-static-form">Submit</fw-button>
-                <fw-button id="reset-static-form">Reset</fw-button>
+
+
+                <fw-button id="submit-static-form">Buscar Aprobadores </fw-button>
+                <fw-button id="reset-static-form">Cancelar</fw-button>
             </div>
         </div>
         <script type="module"
             src="https://cdn.jsdelivr.net/npm/@freshworks/crayons@v4/dist/crayons/crayons.esm.js"></script>
         <script nomodule src="https://cdn.jsdelivr.net/npm/@freshworks/crayons@v4/dist/crayons/crayons.js"></script>
+
+
+        <script>
+            //listener de primer select tipo nota crédito
+            document.addEventListener('DOMContentLoaded', () => {
+                const optionSelect = document.getElementById("tipo-nota-credito");
+                optionSelect.addEventListener('fwChange', (e) => {
+                    console.log(e.detail.value);
+                    if (e.detail.value === 'operacional') {
+                        const formOperacional = document.getElementById("form-operacional");
+                        formOperacional.style.display = "block";
+                        const formAdministrativa = document.getElementById("form-administrativa");
+                        formAdministrativa.style.display = "none";
+                    }
+                    else if (e.detail.value === 'administrativa') {
+                        const formAdministrativa = document.getElementById("form-administrativa");
+                        formAdministrativa.style.display = "block";
+                        const formOperacional = document.getElementById("form-operacional");
+                        formOperacional.style.display = "none";
+                    }
+                });
+            });
+        </script>
 
 </body>
 
