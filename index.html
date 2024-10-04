@@ -109,26 +109,36 @@
 
 
                     <div id="form-operacional" class="form-operacional" style="display: none;">
+                        <div class="tipo-de-venta">
+                            <fw-select label="Tipo de venta" id="tipo_venta_operacional" required="true" value="1"
+                                placeholder="Tipo de venta">
+
+                                <fw-select-option value="venta-credito">Por venta Crédito</fw-select-option>
+                                <fw-select-option value="venta-contado">Por venta Contado</fw-select-option>
+                            </fw-select>
+                        </div>
                         <div class="section-1">
                             <div class="first-row">
-                                <fw-select label="Centro de costo" id="centro_costo_administrativa" required="true"
+                                <fw-input type="NUMBER" name="centro_costo_operacional" label="Centro de Costo"
+                                    placeholder="Centro de Costo" id="centro_costo_operacional"></fw-input>
+                                <!-- <fw-select label="Centro de costo" id="centro_costo_operacional" required="true"
                                     value="1" placeholder="Centro de costo">
 
                                     <fw-select-option value="administrativa">Administrativa</fw-select-option>
                                     <fw-select-option value="operacional">Operacional</fw-select-option>
-                                </fw-select>
+                                </fw-select> -->
                             </div>
                             <div class="inputs-section">
-                                <fw-form-control type="TEXT" name="nombre" placeholder="Nombre" required label="Nombre"
-                                    id="nombre_administrativa"></fw-form-control>
-                                <fw-form-control type="TEXT" name="lob" placeholder="LOB" required label="LOB"
-                                    id="lob_administrativa"></fw-form-control>
-                                <fw-form-control type="TEXT" name="cliente" placeholder="Cliente" required
-                                    label="Cliente" id="cliente_administrativa"></fw-form-control>
-                                <fw-form-control type="TEXT" name="division" placeholder="Division" required
-                                    label="Division" id="division_administrativa"></fw-form-control>
-                                <fw-form-control type="TEXT" name="agrupbise" placeholder="Bise" required
-                                    label="Agrup BISE" id="bise_administrativa"></fw-form-control>
+                                <fw-form-control type="TEXT" name="nombre-cc-operacional" placeholder="Nombre" required
+                                    label="Nombre" id="nombre-cc-operacional"></fw-form-control>
+                                <fw-form-control type="TEXT" name="lob-operacional" placeholder="LOB" required
+                                    label="LOB" id="lob-operacional"></fw-form-control>
+                                <fw-form-control type="TEXT" name="cliente-operacional" placeholder="Cliente" required
+                                    label="Cliente" id="cliente-operacional"></fw-form-control>
+                                <fw-form-control type="TEXT" name="division-operacional" placeholder="Division" required
+                                    label="Division" id="division-operacional"></fw-form-control>
+                                <fw-form-control type="TEXT" name="bise-operacional" placeholder="Bise" required
+                                    label="Agrup BISE" id="bise-operacional"></fw-form-control>
                             </div>
                         </div>
 
@@ -165,14 +175,13 @@
                             <fw-select label="Tipo" id="tipo_administrativa" required="true" value="1"
                                 placeholder="Tipo">
 
-                                <fw-select-option value="nc-anulacion">NC Por Anulación</fw-select-option>
-                                <fw-select-option value="nc-rebaja">NC Por Rebaja</fw-select-option>
-                                <fw-select-option value="nc-correccion">NC Por Corrección</fw-select-option>
+                                <fw-select-option value="nc-anulacion">Nota de crédito por Anulación</fw-select-option>
+                                <fw-select-option value="nc-rebaja">Nota de crédito por Rebaja</fw-select-option>
+                                <fw-select-option value="nc-correccion">Nota de crédito de Corrección</fw-select-option>
+                                <fw-select-option value="nc-anula-debito">Anula Nota de Débito</fw-select-option>
                             </fw-select>
 
 
-                            <fw-form-control type="TEXT" name="tipo" placeholder="Tipo" required label="Tipo"
-                                id="tipo"></fw-form-control>
 
                             <fw-form-control type="TEXT" name="monto" placeholder="Monto" required label="Monto"
                                 id="monto"></fw-form-control>
@@ -226,7 +235,86 @@
                         formOperacional.style.display = "none";
                     }
                 });
+
+                // TO DO: AGREGAR EVENT LISTENER AL cambiar numero de cc    
+                const inputCentroCostoOperacional = document.getElementById("centro_costo_operacional");
+                let debounceTimeout;
+
+                inputCentroCostoOperacional.addEventListener('input', (e) => {
+                    clearTimeout(debounceTimeout);
+
+                    debounceTimeout = setTimeout(async () => {  
+                        const valorDigitado = e.target.value;
+                        if (valorDigitado) {
+                            try {
+                                let response = await getCentroCosto(valorDigitado);
+                                autoFillFieldsOperacional(response.records[0].data); 
+                            } catch (error) {
+                                console.error('Error al obtener centro de costo:', error);
+                            }
+                        }
+                    }, 2000); 
+                });
+
+                const submitButton = document.getElementById("submit-static-form");
+                submitButton.addEventListener('fwClick', async (e) => {
+                    console.log("button Clicked");
+
+                    const form = document.getElementById("fw-static-form");
+
+                    const cc_input = document.getElementById("centro_costo_operacional");
+                    console.log(cc_input.value);
+
+                });
+
             });
+
+
+
+
+
+            async function getCentroCosto(id_cc) {
+                try {
+                    const myHeaders = new Headers();
+                    myHeaders.append("Authorization", "Basic cE1Felp6cmFMNm5XamVDcEt6SDpY");
+
+                    const requestOptions = {
+                        method: "GET",
+                        headers: myHeaders,
+                        redirect: "follow"
+                    };
+
+                    const response = await fetch(`https://aramark-hr.freshservice.com/api/v2/objects/21000039591/records?query=id_cc%20%3A%20%27${id_cc}%27`, requestOptions);
+
+                    if (!response.ok) {
+                        throw new Error(`Error ${response.status}: ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    console.log(result);
+                    return result;
+
+                } catch (error) {
+                    console.error('Error fetching centro de costo:', error);
+                }
+            }
+
+
+            function autoFillFieldsOperacional(response) {
+                console.log(response);
+
+                const form = document.getElementById("fw-static-form");
+                form.setFieldValue(['nombre-cc-operacional'], response.name_cc);
+                form.setFieldValue(['lob-operacional'], response.lob);
+                form.setFieldValue(['cliente-operacional'], response.client);
+                form.setFieldValue(['division-operacional'], response.division);
+                form.setFieldValue(['bise-operacional'], response.agrup_bise);
+
+            }
+
+
+
+
         </script>
 
 </body>
