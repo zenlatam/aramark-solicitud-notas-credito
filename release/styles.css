@@ -1,0 +1,282 @@
+h4.item-name {
+    font-size: .9rem;
+}
+
+p.item-short-description {
+    font-size: .7rem;
+}
+
+.fw-card-1{
+  margin: 1rem 0;
+}
+
+#notas-tab{
+  background-image: url(https://i.postimg.cc/PfL82Vgz/Foto-RRHH.jpg);
+  width: 22rem;
+  height: 13rem;
+  background-size: cover;
+}
+
+.inputs-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+fw-form-control {
+  margin-top: -1rem;
+}
+
+
+#rrhh-tab{
+  background-image: url(https://i.postimg.cc/PfL82Vgz/Foto-RRHH.jpg);
+  width: 22rem;
+  height: 13rem;
+  background-size: cover;
+}
+
+#supply-tab{
+  background-image: url(https://i.postimg.cc/YCTbbNrb/Foto-Suppy-Chain.jpg);
+  width: 22rem;
+  height: 13rem;
+  background-size: cover;
+}
+
+#cc-button{
+  
+  background-image: url(https://raw.githubusercontent.com/zenlatam/aramark-solicitud-notas-credito/refs/heads/main/Foto-finanzas.png);
+  width: 22rem;
+  height: 13rem;
+  background-size: cover;
+}
+
+#hero-banner {
+  background:url("https://i.postimg.cc/R06Hdy3B/01.png")!important;
+  background-position: 10% 70% !important;
+  background-size:100%!important;
+  background-repeat: no-repeat!important;
+}
+
+
+.nav-tabs{
+    justify-content: center;
+    border: none;
+ 	border-bottom: solid 1px #d2d2d2;
+}
+
+
+
+button#rrhh-tab, button#supply-tab{
+    border: solid 1px #d2d2d2;
+	color: black;
+}
+
+button#rrhh-tab:hover, button#supply-tab:hover{
+    color: white;
+  	background-color: #e1002a;
+}
+
+
+.nav-item{
+
+}
+
+.nav-link{
+    padding: 1rem 2rem;
+}
+
+.nav-item .active{
+    background-color: #e1002a !important;
+    color: white !important;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+    height: max-content;
+    border: none;
+}
+
+.tab-flex{
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    background-color: #ebeff3;
+}
+
+.btn-aramark {
+    background-color: white;
+    color: #12344d;
+    border-radius: 4px;
+    padding: 1rem;
+  	max-width: 20rem;
+
+}
+
+.card{
+  height: 15rem;
+  width: 20rem;
+  display: flex;
+  justify-content: center;
+  border: none;
+}
+
+.btn-aramark img{
+    max-height: 100px;
+    margin: 1rem;
+}
+
+.descripcion-img{
+  font-size: .7rem;
+}
+
+ul li {
+    padding: 0;
+  margin: 16px 16px 0 16px;
+}
+
+
+.card-pais{
+   color: #12344d;
+   padding: .5rem;
+
+}
+
+.card-pais img {
+    max-height: 100px;
+    margin: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.inputs-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .botones-bottom {
+        margin: 1rem 0;
+    }
+
+    /* Estilos tabla */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+
+    th {
+        /* border: 1px solid black; */
+        background-color: rgb(245, 247, 249);
+        color: rgb(71, 88, 103);
+    }
+
+    tr {
+        border-block-end: 1px solid rgb(235, 239, 243);
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 5px;
+        border: 1px solid rgb(207, 215, 223);
+        border-radius: 5px;
+    }
+
+    button {
+        margin-top: 10px;
+    }
+
+
+    .tipo-nota-credito {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .inputs-correccion {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .first-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    #tipo-nc {
+        display: none;
+    }
+
+    .select-spinner {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .select-spinner fw-select {
+        width: 45%;
+    }
+
+    .select-spinner fw-spinner {
+        margin-top: .5rem;
+    }
+
+
+    /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 2rem auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
