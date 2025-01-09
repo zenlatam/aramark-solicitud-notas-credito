@@ -8,7 +8,7 @@
     
     <div id="spinner-loader" class="spinner-loader">
         <span class="loaderSpinner"></span>
-        <h2>Cargando Folios DTE...</h2>
+        <h2>Cargando Formulario...</h2>
         </div>
     <div id="modal-body" class="modal-body" style="display: none;">
 <div id="static-form-container">
@@ -61,7 +61,7 @@
                 </div>
                 <div class="select-spinner" id="folio-spinner">
                     <fw-select label="Folio DTE" id="folio_loading"  value="-"
-                        placeholder="Folio DTE" disabled error-text="Cargando Folios DTE..."
+                        placeholder="Folio DTE" disabled error-text="Cargando Formulario..."
                         state="error">
                     </fw-select>
                     <fw-spinner size="medium"></fw-spinner>
@@ -103,7 +103,7 @@
                     <fw-input type="NUMBER" name="centro_costo_operacional" label="Centro de Costo"
                         placeholder="Centro de Costo" id="centro_costo_operacional" required></fw-input>
                     <!-- <fw-select label="Centro de costo" id="centro_costo_operacional"
-                        value="1" placeholder="Centro de costo">
+                        value="" placeholder="Centro de costo">
                         <fw-select-option value="administrativa">Administrativa</fw-select-option>
                         <fw-select-option value="operacional">Operacional</fw-select-option>
                     </fw-select> -->
@@ -138,15 +138,15 @@
             </div>
             <div class="fw-card-1">
                 <div id="section-operacional" class="section-operacional inputs-section">
-                <fw-select label="Tipo nota de crédito" id="tipo-nc"  value="1"
+                <fw-select label="Tipo nota de crédito" id="tipo-nc"  value=""
                     placeholder="Tipo">
                     <fw-select-option value="nc-anulacion">Nota de crédito por Anulación</fw-select-option>
                     <fw-select-option value="nc-rebaja">Nota de crédito por Rebaja</fw-select-option>
                     <fw-select-option value="nc-correccion">Nota de crédito de Corrección</fw-select-option>
                     <fw-select-option value="nc-anula-debito">Anula Nota de Débito</fw-select-option>
                 </fw-select>
-                <fw-input type="TEXT" id="monto" name="monto" placeholder="Monto"
-                    label="Monto" required></fw-input>
+                <fw-input type="TEXT" id="monto" name="monto" placeholder="Monto Neto a Anular"
+                    label="Monto Neto a Anular" required></fw-input>
             </div>
             <div class="correccion-form" id="correccion-form" style="display: none;">
                 <fw-select label="Motivo Corrección" id="motivo-correccion">
@@ -184,7 +184,7 @@
             </div>
             <div class="section-3">
                 <!-- select de nc-anulacion -->
-                <fw-select label="Motivo" id="motivo-operacional-anulacion"  value="1"
+                <fw-select label="Motivo" id="motivo-operacional-anulacion"  value=""
                     placeholder="Motivo" style="display: none;">
                     <fw-select-option value="operacional - duplicidad de cobro">Operacional - Duplicidad de cobro</fw-select-option>
                     <fw-select-option value="operacional - diferencias en precios">Operacional - Diferencias en precios</fw-select-option>
@@ -197,7 +197,7 @@
                 </fw-select>
 
                 <!-- select de nc-rebaja -->
-                <fw-select label="Motivo" id="motivo-operacional-rebaja"  value="1"
+                <fw-select label="Motivo" id="motivo-operacional-rebaja"  value=""
                     placeholder="Motivo" style="display: none;">
                     <fw-select-option value="operacional - duplicidad de cobro">Operacional - Duplicidad de cobro</fw-select-option>
                     <fw-select-option value="operacional - diferencias en precios">Operacional - Diferencias en precios</fw-select-option>
@@ -208,7 +208,7 @@
                 </fw-select>
 
                 <!-- select de nc-debito-anulacion -->
-                <fw-select label="Motivo" id="motivo-operacional-nc-debito-anulacion"  value="1"
+                <fw-select label="Motivo" id="motivo-operacional-nc-debito-anulacion"  value=""
                     placeholder="Motivo" style="display: none;">
 
 
@@ -218,7 +218,7 @@
 
                 <!-- select de por venta contado -->
                 <fw-select label="Motivo" id="motivo-operacional-debito-anulacion"
-                    value="1" placeholder="Motivo" style="display: none;">
+                    value="" placeholder="Motivo" style="display: none;">
                     <fw-select-option value="operacional - duplicidad de cobro">Operacional - Duplicidad de cobro</fw-select-option>
                     <fw-select-option value="operacional - diferencias en precios">Operacional - Diferencias en precios</fw-select-option>
                     <fw-select-option value="operacional - cambios de referencias">Operacional - Cambios de referencias</fw-select-option>
@@ -325,11 +325,64 @@
             });
 
             const tipoVenta = document.getElementById("tipo_venta_operacional");
+            const tipoVentaOperacional = document.getElementById("tipo-de-venta-administrativa");
             const tipoNC = document.getElementById("tipo-nc");
             const motivoDebitoAnulacion = document.getElementById("motivo-operacional-debito-anulacion");
             const motivoOperacionalDebitoAnulacion = document.getElementById("motivo-operacional-nc-debito-anulacion");
+            const monto = document.getElementById("monto");
+            const montoAdministrativa = document.getElementById("monto-administrativa");
+
+            monto.addEventListener('input', (e) => {
+                console.log("monto: ", e.target.value);
+                let input = e.target.value;
+
+                // Remover cualquier carácter que no sea número
+                input = input.replace(/\D/g, '');
+
+                // Agregar separadores de miles
+                const formatted = new Intl.NumberFormat('es-CL').format(input);
+
+                // Actualizar el valor del input con el formato
+                e.target.value = formatted;
+            });
+
+            montoAdministrativa.addEventListener('input', (e) => {
+                console.log("monto-administrativa: ", e.target.value);
+                let input = e.target.value;
+
+                // Remover cualquier carácter que no sea número
+                input = input.replace(/\D/g, '');
+
+                // Agregar separadores de miles
+                const formatted = new Intl.NumberFormat('es-CL').format(input);
+
+                // Actualizar el valor del input con el formato
+                e.target.value = formatted;
+            });
+
+
+            tipoVentaOperacional.addEventListener('fwChange', (e) => {
+                console.log(e.detail.value);
+                const idsCamposAdministrativos = ["centro_costo_administrativa", "nombre-cc-administrativa", "lob-administrativa", "cliente-administrativa", "division-administrativa", "bise-administrativa", "rut_administrativa", "monto_neto_administrativa", "nombre_folio_administrativa", "fecha_emision_administrativa", "folio-dte-administrativa", "monto-administrativa", "detalle-motivo-administrativa", "motivo-administrativa"];
+                for (let i = 0; i < idsCamposAdministrativos.length; i++) {
+                    const campo = document.getElementById(idsCamposAdministrativos[i]);
+                    campo.value = "";
+                }
+                filterFoliosAndUpdateSelect();
+            });
+
             tipoVenta.addEventListener('fwChange', (e) => {
                 console.log(e.detail.value);
+
+                const idsCamposOperacionales = ["centro_costo_operacional", "nombre-cc-operacional", "lob-operacional", "cliente-operacional", "division-operacional", "bise-operacional", "rut_operacional", "monto_neto_operacional", "nombre_folio_operacional", "fecha_emision_operacional", "folio_dte_operacional", "monto", "detalle-motivo-operacional"];
+
+                // const idsCamposAdministrativos = ["centro_costo_administrativa", "nombre-cc-administrativa", "lob-administrativa", "cliente-administrativa", "division-administrativa", "bise-administrativa", "rut_administrativa", "monto_neto_administrativa", "nombre_folio_administrativa", "fecha_emision_administrativa", "folio-dte-administrativa"];
+
+                for (let i = 0; i < idsCamposOperacionales.length; i++) {
+                    const campo = document.getElementById(idsCamposOperacionales[i]);
+                    campo.value = "";
+                }
+
                 if (e.detail.value == 'venta-credito') {
                     tipoNC.style.display = "block";
                     motivoDebitoAnulacion.style.display = "none";
@@ -353,6 +406,7 @@
 
                     tipoNcSelect.dispatchEvent(fwChangeEvent);
                 }
+                filterFoliosAndUpdateSelect();
             });
 
             // Función para mostrar/ocultar el detalle según el motivo seleccionado
@@ -462,6 +516,16 @@
             inputCentroCostoOperacional.addEventListener('input', (e) => {
                 clearTimeout(debounceTimeout);
 
+                const tipoVenta = document.getElementById("tipo_venta_operacional").value;
+                console.log("TIPO VENTA SELECTED: ", tipoVenta);
+                let tipoVentaOperacional = ""
+                if(tipoVenta == 'venta-credito'){
+                    tipoVentaOperacional = "CREDITO";
+                }
+                else if(tipoVenta == 'venta-contado'){
+                    tipoVentaOperacional = "CONTADO";
+                };
+
                 debounceTimeout = setTimeout(async () => {
                     const valorDigitado = e.target.value;
                     if (valorDigitado) {
@@ -473,7 +537,7 @@
                                 .map(key => response.records[0].data[key]);
                             console.log("aprobadores: ", aprobadores);
                             console.log("valor digitado", valorDigitado);
-                            filterFoliosAndUpdateSelect(valorDigitado);
+                            filterFoliosAndUpdateSelect(valorDigitado, tipoVentaOperacional);
                             inputCentroCostoAdministrativo.state = "normal";
                             inputCentroCostoOperacional.state = "normal";
                         } catch (error) {
@@ -490,6 +554,17 @@
 
             inputCentroCostoAdministrativo.addEventListener('input', (e) => {
                 clearTimeout(debounceTimeout);
+                const tipoVenta = document.getElementById("tipo_venta_administrativa").value;
+                console.log("TIPO VENTA SELECTED: ", tipoVenta);
+                let tipoVentaAdministrativa = ""
+                if(tipoVenta == 'venta-credito'){
+                    tipoVentaAdministrativa = "CREDITO";
+                }
+                else if(tipoVenta == 'venta-contado'){
+                    tipoVentaAdministrativa = "CONTADO";
+                };
+
+
 
                 debounceTimeout = setTimeout(async () => {
                     const valorDigitado = e.target.value;
@@ -504,7 +579,7 @@
                             console.log(aprobadores);
                             console.log("valor digitado", valorDigitado);
 
-                            filterFoliosAndUpdateSelect(valorDigitado);
+                            filterFoliosAndUpdateSelect(valorDigitado, tipoVentaAdministrativa);
                             inputCentroCostoAdministrativo.state = "normal";
                             inputCentroCostoOperacional.state = "normal";
                         } catch (error) {
@@ -648,10 +723,11 @@
     }
 
 
-    // Función para filtrar y actualizar los selectores según el ccosto
-    function filterFoliosAndUpdateSelect(value) {
+    function filterFoliosAndUpdateSelect(value, tipodte) {
         console.log("Input de centro de costo recibido:", value);
         console.log("foliosGlobal:", foliosGlobal);
+
+        console.log("tipodte filter: ", tipodte);
 
         // Validar que foliosGlobal sea un array
         if (!Array.isArray(foliosGlobal)) {
@@ -661,15 +737,15 @@
 
         // Asegurarse de que value sea un string limpio para la comparación
         const cc_value = String(value).trim();
+        const tipodte_value = String(tipodte).trim(); // También se limpia tipodte
 
         // Filtrar los folios
-        const filteredFolios = cc_value
-            ? foliosGlobal.filter(folio => {
-                // console.log("Compare this: ", folio);
-                // console.log(`Comparando: ${folio.data.ccosto} === ${cc_value}`);
-                return String(folio.data.ccosto).trim() === cc_value;
-            })
-            : foliosGlobal; // Si value está vacío, no filtrar
+        const filteredFolios = foliosGlobal.filter(folio => {
+            const matchesCcosto = cc_value ? String(folio.data.ccosto).trim() === cc_value : true;
+            const matchesTipodte = tipodte_value ? String(folio.data.tipo_dte).trim() === tipodte_value : true;
+
+            return matchesCcosto && matchesTipodte;
+        });
 
         // Generar opciones para los selectores
         const optionsObject = createSelectOptionsObject(filteredFolios);
@@ -683,6 +759,7 @@
 
         console.log(`Actualizados los selectores con ${filteredFolios.length} folios.`);
     }
+
 
 
     async function getAprobadorId(email) {
@@ -818,7 +895,7 @@
                 if (i === 2) {
                     input.id = `precio-${fila}`;
                     input.value = `0`;
-                    input.type = "number";
+                    input.type = "text";
                 } else if (i === 1) {
                     input.id = `cantidad-${fila}`;
                     input.value = `1`;
@@ -835,11 +912,34 @@
 
             precioInput.addEventListener('keyup', (e) => {
                 console.log(e.target.value);
+
+                let input = e.target.value;
+
+                // Remover cualquier carácter que no sea número
+                input = input.replace(/\D/g, '');
+
+                // Agregar separadores de miles
+                const formatted = new Intl.NumberFormat('es-CL').format(input);
+
+                // Actualizar el valor del input con el formato
+                e.target.value = formatted;
+
                 calcularTotal();
             });
 
-            cantidadInput.addEventListener('keyup', (e) => {
+
+
+            cantidadInput.addEventListener('change', (e) => {
                 console.log(e.target.value);
+
+                if (e.target.value < 1) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'La cantidad debe ser mayor a 0',
+                    });
+                    return;
+                }
                 calcularTotal();
             });
             // Crear botón de eliminación
@@ -856,16 +956,21 @@
             calcularTotal();
         }
 
-        btn_AddRow.removeEventListener('fwClick', addNewRow)
         btn_AddRow.addEventListener("fwClick", addNewRow);
     }
+
+    // Remove any existing event listeners before adding a new one
+    const btn_AddRow = document.getElementById("addRowBtn");
+    btn_AddRow.removeEventListener('fwClick', addListenerRowBtn);
+    addListenerRowBtn();
 
     function calcularTotal() {
         let total = 0;
         const table = document.getElementById("dynamicTable").getElementsByTagName('tbody')[0];
         for (let i = 0; i < table.rows.length; i++) {
             const cantidadValue = table.rows[i].cells[1].getElementsByTagName("input")[0].value;
-            const precioValue = table.rows[i].cells[2].getElementsByTagName("input")[0].value;
+            const precioValue = table.rows[i].cells[2].getElementsByTagName("input")[0].value.replace(/\D/g, '');
+
 
             const cantidad = parseFloat(cantidadValue) || 0;
             const precio = parseFloat(precioValue) || 0;
@@ -873,12 +978,19 @@
             total += cantidad * precio;
         }
         // document.getElementById("total").textContent = "Total Columna 3: " + total;
-        document.getElementById("monto").value = total;
+
+        const formatted = new Intl.NumberFormat('es-CL').format(total);
+
+
+
+        document.getElementById("monto").value = formatted;
     }
 
     function asignarAprobadores(monto, aprobadores) {
         // Remover punto       s del valor de monto y convertirlo a número
         monto = parseInt(monto.replace(/\./g, ''), 10);
+        console.log("monto asign: ", monto);
+
 
         let cantidadAprobadores;
 
@@ -954,8 +1066,42 @@
             let tipoNotaCredito = document.getElementById("tipo-nc").value;
 
 
+
             const monto_operacional = document.getElementById("monto").value;
-            const monto_administrativa = document.getElementById("monto-administrativa").value;
+
+
+            // Formatear valores para quitar puntos o cualquier carácter no numérico
+            const monto_operacionalRaw = monto_operacional.replace(/\./g, '');
+            const monto_netoRaw = monto_neto.replace(/\./g, '');
+
+            // Convertir a números
+            const monto_operacionalNum = parseFloat(monto_operacionalRaw);
+            const monto_netoNum = parseFloat(monto_netoRaw);
+
+            console.log("monto_operacionalNum: ", monto_operacionalNum);
+            console.log("monto_netoNum: ", monto_netoNum);
+
+            if (monto_operacionalNum > monto_netoNum) {
+                console.log("El monto de la nota de crédito no puede ser mayor al monto neto del DTE.");
+                Swal.fire({
+                    title: "Error en el monto",
+                    text: "El monto de la nota de crédito no puede ser mayor al monto neto del DTE.",
+                    icon: "error"
+                });
+                return; // Detiene la ejecución si no pasa la validación
+            }
+
+
+            if (monto_operacionalNum <= 0) {
+                console.log("El monto de la nota de crédito no puede ser menor o igual a 0.");
+                Swal.fire({
+                    title: "Error en el monto",
+                    text: "El monto de la nota de crédito no puede ser menor o igual a 0.",
+                    icon: "error"
+                });
+                return; // Detiene la ejecución si no pasa la validación
+
+            }
 
             if (tipo_de_venta === '-') {
                 Swal.fire({
@@ -1003,7 +1149,39 @@
                 aprobadoresAsignados = {
                     aprobador_1: jefeFacturacion
                 };
+
+                const idsCamposCorreccion = ["motivo-correccion", "dondedice-input", "debedecir-input"];
+                for (let id of idsCamposCorreccion) {
+                    const campo = document.getElementById(id);
+                    if (campo.value == '') {
+                        Swal.fire({
+                            title: "Error en los campos de corrección",
+                            text: `El campo ${campo.label} está vacío.`,
+                            icon: "error"
+                        });
+                        return; // Detiene la ejecución si no pasa la validación
+                    }
+                }
             }
+
+            if (tipoNotaCredito == 'nc-rebaja') {
+                console.log(">>>>>> nota rebaja <<<<<<");
+
+
+                const idsCamposCorreccion = ["motivo-operacional-rebaja"];
+                for (let id of idsCamposCorreccion) {
+                    const campo = document.getElementById(id);
+                    if (campo.value == '') {
+                        Swal.fire({
+                            title: "Error en los campos de corrección",
+                            text: `El campo ${campo.label} está vacío.`,
+                            icon: "error"
+                        });
+                        return; // Detiene la ejecución si no pasa la validación
+                    }
+                }
+            }
+
             // Asignar aprobadores
 
 
@@ -1136,6 +1314,26 @@
             const monto_operacional = document.getElementById("monto").value;
             const monto_administrativa = document.getElementById("monto-administrativa").value;
             const centro_costo_administrativa = document.getElementById("centro_costo_administrativa").value;
+
+            if (monto > monto_neto) {
+                Swal.fire({
+                    title: "Error en el monto",
+                    text: "El monto de la nota de crédito no puede ser mayor al monto neto del DTE.",
+                    icon: "error"
+                });
+                return; // Detiene la ejecución si no pasa la validación
+
+            }
+
+            if (monto <= 0) {
+                console.log("El monto de la nota de crédito no puede ser menor o igual a 0.");
+                Swal.fire({
+                    title: "Error en el monto",
+                    text: "El monto de la nota de crédito no puede ser menor o igual a 0.",
+                    icon: "error"
+                });
+                return; // Detiene la ejecución si no pasa la validación
+            }
 
 
             if (tipo_venta_administrativa === '-') {
